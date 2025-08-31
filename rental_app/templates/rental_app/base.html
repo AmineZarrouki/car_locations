@@ -5,33 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Rental Project</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
-        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        h1, h2 { color: #333; }
-        ul { list-style-type: none; padding: 0; }
-        li { background-color: #e9e9e9; margin-bottom: 10px; padding: 10px; border-radius: 4px; }
-        a { text-decoration: none; color: #007bff; }
-        a:hover { text-decoration: underline; }
-        .button { display: inline-block; background-color: #007bff; color: white; padding: 8px 15px; border-radius: 5px; text-align: center; margin-top: 10px; }
-        .button.delete { background-color: #dc3545; }
-        .button:hover { opacity: 0.9; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        /* ===== Base ===== */
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        /* ===== Navbar ===== */
+        .navbar {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+        .navbar a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Container ===== */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        h1, h2 {
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        /* ===== Lists ===== */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* ===== Buttons ===== */
+        .button {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s, opacity 0.2s;
+            margin-top: 10px;
+        }
+        .button.primary { background-color: #007bff; color: white; }
+        .button.primary:hover { background-color: #0056b3; }
+        .button.success { background-color: #28a745; color: white; }
+        .button.success:hover { background-color: #1e7e34; }
+        .button.delete { background-color: #dc3545; color: white; }
+        .button.delete:hover { background-color: #b02a37; }
+
+        /* ===== Table ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.03em;
+        }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #eef5ff; }
+
+        /* ===== Forms ===== */
         form { margin-top: 20px; }
-        form p { margin-bottom: 10px; }
-        form label { display: block; margin-bottom: 5px; font-weight: bold; }
-        form input[type="text"], form input[type="email"], form input[type="password"], form input[type="number"], form input[type="date"], form select, form textarea { width: calc(100% - 22px); padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        form button { background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        form button:hover { opacity: 0.9; }
+        form p { margin-bottom: 15px; }
+        form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"],
+        form input[type="number"],
+        form input[type="date"],
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+            transition: border 0.2s;
+        }
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+        }
+        form button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        form button:hover { background-color: #1e7e34; }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Car Rental Project</h1>
+        <div>
+            <a href="{% url 'car_list' %}">Cars</a>
+            <a href="{% url 'rental_list' %}">Rentals</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
     <div class="container">
         {% block content %}
         {% endblock %}
     </div>
 </body>
 </html>
-
-

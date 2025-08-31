@@ -1,37 +1,159 @@
 {% extends 'rental_app/base.html' %}
 
 {% block content %}
-    <h1>Rentals</h1>
-    <a href="{% url 'rental_create' %}" class="button">Add New Rental</a>
-    <table>
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Car</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Total Cost</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for rental in rentals %}
-            <tr>
-                <td>{{ rental.user.username }}</td>
-                <td>{{ rental.car.make }} {{ rental.car.model }}</td>
-                <td>{{ rental.start_date }}</td>
-                <td>{{ rental.end_date }}</td>
-                <td>{{ rental.total_cost }}</td>
-                <td>{{ rental.status }}</td>
-                <td>
-                    <a href="{% url 'rental_update' rental.pk %}">Edit</a> |
-                    <a href="{% url 'rental_delete' rental.pk %}" class="button delete">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="rentals-container">
+    <h1 class="page-title">🚗 Rentals</h1>
+
+    <div class="actions">
+        <a href="{% url 'rental_create' %}" class="btn btn-primary">➕ Add New Rental</a>
+    </div>
+
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Car</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Total Cost</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                <tr>
+                    <td>{{ rental.user.username }}</td>
+                    <td>{{ rental.car.make }} {{ rental.car.model }}</td>
+                    <td>{{ rental.start_date }}</td>
+                    <td>{{ rental.end_date }}</td>
+                    <td>${{ rental.total_cost }}</td>
+                    <td>
+                        <span class="status {{ rental.status|lower }}">
+                            {{ rental.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{% url 'rental_update' rental.pk %}" class="btn btn-sm btn-edit">Edit</a>
+                        <a href="{% url 'rental_delete' rental.pk %}" class="btn btn-sm btn-delete">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+/* Container */
+.rentals-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Title */
+.page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease-in-out;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-sm {
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.btn-edit {
+    background: #ffc107;
+    color: #000;
+}
+
+.btn-edit:hover {
+    background: #e0a800;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #b02a37;
+}
+
+/* Table */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.styled-table th, 
+.styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.styled-table thead {
+    background: #007bff;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.styled-table tbody tr:hover {
+    background: #f1f7ff;
+}
+
+/* Status tags */
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status.active { background: #d4edda; color: #155724; }
+.status.pending { background: #fff3cd; color: #856404; }
+.status.cancelled { background: #f8d7da; color: #721c24; }
+</style>
 {% endblock %}
-
-

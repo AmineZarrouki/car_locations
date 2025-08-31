@@ -1,0 +1,29 @@
+{% extends 'rental_app/base.html' %}
+
+{% block content %}
+    <h1>Admins</h1>
+    <a href="{% url 'admin_create' %}" class="button">Add New Admin</a>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Permissions</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admins %}
+            <tr>
+                <td>{{ admin.user.username }}</td>
+                <td>{{ admin.permissions }}</td>
+                <td>
+                    <a href="{% url 'admin_update' admin.pk %}">Edit</a> |
+                    <a href="{% url 'admin_delete' admin.pk %}" class="button delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+

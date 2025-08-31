@@ -1,0 +1,13 @@
+{% extends 'rental_app/base.html' %}
+
+{% block content %}
+    <h1>Delete Rental</h1>
+    <p>Are you sure you want to delete the rental for {{ object.user.username }} with {{ object.car.make }} {{ object.car.model }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Confirm Delete</button>
+    </form>
+    <a href="{% url 'rental_list' %}">Cancel</a>
+{% endblock %}
+
+

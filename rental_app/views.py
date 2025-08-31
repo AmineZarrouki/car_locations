@@ -119,3 +119,103 @@ class RentalViewSet(viewsets.ModelViewSet):
             return Response(RentalSerializer(rental).data)
         return Response({"detail": "Status not provided."}, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from .forms import UserForm, CarForm, AdminForm, RentalForm
+
+# Template Views for User
+class UserListView(ListView):
+    model = User
+    template_name = 'rental_app/user_list.html'
+    context_object_name = 'users'
+
+class UserCreateView(CreateView):
+    model = User
+    form_class = UserForm
+    template_name = 'rental_app/user_form.html'
+    success_url = reverse_lazy('user_list')
+
+class UserUpdateView(UpdateView):
+    model = User
+    form_class = UserForm
+    template_name = 'rental_app/user_form.html'
+    success_url = reverse_lazy('user_list')
+
+class UserDeleteView(DeleteView):
+    model = User
+    template_name = 'rental_app/user_confirm_delete.html'
+    success_url = reverse_lazy('user_list')
+
+# Template Views for Car
+class CarListView(ListView):
+    model = Car
+    template_name = 'rental_app/car_list.html'
+    context_object_name = 'cars'
+
+class CarCreateView(CreateView):
+    model = Car
+    form_class = CarForm
+    template_name = 'rental_app/car_form.html'
+    success_url = reverse_lazy('car_list')
+
+class CarUpdateView(UpdateView):
+    model = Car
+    form_class = CarForm
+    template_name = 'rental_app/car_form.html'
+    success_url = reverse_lazy('car_list')
+
+class CarDeleteView(DeleteView):
+    model = Car
+    template_name = 'rental_app/car_confirm_delete.html'
+    success_url = reverse_lazy('car_list')
+
+# Template Views for Admin
+class AdminListView(ListView):
+    model = Admin
+    template_name = 'rental_app/admin_list.html'
+    context_object_name = 'admins'
+
+class AdminCreateView(CreateView):
+    model = Admin
+    form_class = AdminForm
+    template_name = 'rental_app/admin_form.html'
+    success_url = reverse_lazy('admin_list')
+
+class AdminUpdateView(UpdateView):
+    model = Admin
+    form_class = AdminForm
+    template_name = 'rental_app/admin_form.html'
+    success_url = reverse_lazy('admin_list')
+
+class AdminDeleteView(DeleteView):
+    model = Admin
+    template_name = 'rental_app/admin_confirm_delete.html'
+    success_url = reverse_lazy('admin_list')
+
+# Template Views for Rental
+class RentalListView(ListView):
+    model = Rental
+    template_name = 'rental_app/rental_list.html'
+    context_object_name = 'rentals'
+
+class RentalCreateView(CreateView):
+    model = Rental
+    form_class = RentalForm
+    template_name = 'rental_app/rental_form.html'
+    success_url = reverse_lazy('rental_list')
+
+class RentalUpdateView(UpdateView):
+    model = Rental
+    form_class = RentalForm
+    template_name = 'rental_app/rental_form.html'
+    success_url = reverse_lazy('rental_list')
+
+class RentalDeleteView(DeleteView):
+    model = Rental
+    template_name = 'rental_app/rental_confirm_delete.html'
+    success_url = reverse_lazy('rental_list')
+
+

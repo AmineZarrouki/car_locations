@@ -1,0 +1,37 @@
+{% extends 'rental_app/base.html' %}
+
+{% block content %}
+    <h1>Cars</h1>
+    <a href="{% url 'car_create' %}" class="button">Add New Car</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>License Plate</th>
+                <th>Daily Rate</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.make }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.year }}</td>
+                <td>{{ car.license_plate }}</td>
+                <td>{{ car.daily_rate }}</td>
+                <td>{{ car.availability_status }}</td>
+                <td>
+                    <a href="{% url 'car_update' car.pk %}">Edit</a> |
+                    <a href="{% url 'car_delete' car.pk %}" class="button delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
